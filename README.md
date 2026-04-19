@@ -53,10 +53,8 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 ## Development
 
     This project was developed through a collaborative process between the author and Google Gemini.
-    
     Role: Gemini assisted in architecting specific functions and optimizing logic.
-    
-    Oversight: All AI-generated code was manually reviewed, refactored, and tested to ensure it meets project standards.
+    Oversight: All AI-generated code was manually reviewed, refactored, and tested to ensure it meets project needs.
 
 
 ## Terminology
@@ -104,7 +102,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 	1.  Open the `CIVAkeypush.macros` macro group file and note the individual macros named
 		`leg 1` to 7, and `calibration`.
-        The assigned activation hotkeys are `ctrl + shift + 0` theough 9. Change to your preferred
+        The assigned activation hotkeys are `ctrl + shift + 0` through 9. Change to your preferred
         hotkeys as needed. The hotkey for each leg should be a compound key combination
         dissimilar to other shortcut keys to avoid inadvertent use.
 
@@ -152,7 +150,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 > [!NOTE] 
 >   v. The effective use of the rotary waypoint selector requires
->      a {marker key}{move to selector}{mouse click}{mouse wheel forward}{mouse click}
+>      a `{marker key}{move to selector}{mouse click}{mouse wheel forward}{mouse click}`
 >      sequence to prevent a stray mouse wheel movement changing the screen view.
 >      This is the reason the 'waypoint select' button contains multiple clicks
 >      but every other button has only 1 click.
