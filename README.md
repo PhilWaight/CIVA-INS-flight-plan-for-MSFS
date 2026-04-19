@@ -106,7 +106,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
         hotkeys as needed. The hotkey for each leg should be a compound key combination
         dissimilar to other shortcut keys to avoid inadvertent use.
 
-    2.  In MSFS, zoom to the CIVA unit with your saved view. you can run the provided calibration template `ctrl + shift + 0` 
+    2.  In MSFS, zoom to the CIVA unit with your saved view. You could run the provided calibration template `ctrl + shift + 0` 
 		if you have a 4K  monitor to show mouse moves and clicks. 
         Once you have recorded your own calibration, you can check your result using this hotkey.
         
@@ -255,12 +255,12 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 	    Hit the hotkey `Ctrl + Shift + 2` and watch  the points load.
 	    A message box appears to show each waypoint name, position and elevation.
 
-	4.  CLick `Wy Pt Chg` button and select 0 to 1. The From-To should change.
+	4.  Click `Wy Pt Chg` button and select 0 to 1. The From-To should change.
 
 	5.  Clear `Trk Hld` and hit `INS` on the AP panel.
 
 2.  If you are using CIVA manual load for all legs, 
-	follow 1.3 for the first leg with `Ctrl + Shift + 1`
+	follow from step 1.iii for the first leg with `Ctrl + Shift + 1` and from step 1.ii for subsequent legs.
 	 
 	
 ## 📁 Project Structure
@@ -287,11 +287,11 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
     the Bristol Channel. The CPT3F departure has been expanded in the "Selected Route" section 
     of the Simbrief edit page, although the VOR navigation departure is more interesting and typical. 
 
-        ```
-        EGLL D255G D259K WOD D100H CPT KENET UNZIB D149T BHD57 LESLU 
-        5041N01500W 5050N02000W 5030N03000W 4916N04000W 4703N05000W 4610N05300W 4414N06000W 
-        4246N06500W 4200N06700W 4044N06955W 4027N07230W CAMRN KJFK
-        ```
+```
+EGLL D255G D259K WOD D100H CPT KENET UNZIB D149T BHD57 LESLU 
+5041N01500W 5050N02000W 5030N03000W 4916N04000W 4703N05000W 4610N05300W 4414N06000W 
+4246N06500W 4200N06700W 4044N06955W 4027N07230W CAMRN KJFK
+```
 
     This should be placed in the flight plans Simbrief export folder.
     
