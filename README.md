@@ -299,7 +299,10 @@ EGLL D255G D259K WOD D100H CPT KENET UNZIB D149T BHD57 LESLU
 - [x] Add usage videos
 - [ ] Add a popup message or a kneepad note or similar to name waypoints as the `from-to` selector progresses.
       This may require an app such as Spad.Next monitor the next waypoint id.
-- [ ] Add a warning as the last waypoint is the active destination
+- [ ] Add a warning as the last waypoint becomes the active destination
+- [ ] The 9 waypoint entry has so far been very reliable in testing. A single waypoint entry option could be considered.
+- [ ] An option to push a set of named waypoints on the fly for a diversion would be appealing, with a lookup to find the 
+      coordinates. This could involve some interaction with the EFB.
 
 
 ## ⚖️ License
