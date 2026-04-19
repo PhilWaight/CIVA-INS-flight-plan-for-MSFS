@@ -101,16 +101,18 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 3. Start MSFS and Macro Commander
 
-	1. Open the `CIVAkeypush.macro` macro group file and note the individual macros named
+	1.  Open the `CIVAkeypush.macros` macro group file and note the individual macros named
 		`leg 1` to 7, and `calibration`.
+        The assigned activation hotkeys are `ctrl + shift + 0` theough 9. Change to your preferred
+        hotkeys as needed. The hotkey for each leg should be a compound key combination
+        dissimilar to other shortcut keys to avoid inadvertent use.
 
-    2.  In MSFS, zoomed to the CIVA unit, you can run the provided calibration template `Shift+Ctrl+0` 
+    2.  In MSFS, zoom to the CIVA unit with your saved view. you can run the provided calibration template `ctrl + shift + 0` 
 		if you have a 4K  monitor to show mouse moves and clicks. 
+        Once you have recorded your own calibration, you can check your result using this hotkey.
         
 > [!TIP]
-> See the project: Videos\CalibrationTest.mkv video.
-        
-		Once you have recorded your own calibration, you can check your result using this hotkey.
+>       See the project: Videos\CalibrationTest.mkv video.
 
 4. Calibrate: 
 
@@ -147,13 +149,15 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 	4. The 2,4,6,8 buttons provide the cardinal directions N, W, S, E and only need 
 	   recording once.
 
-	5. Important note: The effective use of the rotary waypoint selector requires
-       a {marker key}{move to selector}{mouse click}{mouse wheel forward}{mouse click}
-       sequence to prevent a stray mouse wheel movement changing the screen view.
-       This is the reason the 'waypoint select' button contains multiple clicks
-       but every other button has only 1 click.
-	   You will need to follow this rule when recording the scroll. In testing
-	   a single <mwheel_f> command worked well. If your mouse wheel has notched scroll option, this makes it easier.
+> [!NOTE] 
+
+>   5. The effective use of the rotary waypoint selector requires
+>      a {marker key}{move to selector}{mouse click}{mouse wheel forward}{mouse click}
+>      sequence to prevent a stray mouse wheel movement changing the screen view.
+>      This is the reason the 'waypoint select' button contains multiple clicks
+>      but every other button has only 1 click.
+>      You will need to follow this rule when recording the scroll. In testing
+>      a single <mwheel_f> command worked well. If your mouse wheel has notched scroll option, this makes it easier.
 
 	6. Prerequisites for manual waypoint entry are:
 
@@ -190,9 +194,9 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
         This step can be performed in the editor window, with convenient double click 
         on a command to check the arguments.
 
-	2.  The parsing of this file uses comment lines so avoid extraneous comments beyond the header.
+	2.  The parsing of this file uses comment lines as delimiters, so avoid extraneous comments beyond the header.
 
-	3.  The `<wx>(567,0)<#>` wait first argument and <mm> last argument lines  
+	3.  The `<wx>(567,0)<#>` wait first argument and `<mm>` last argument lines  
 	    need to be edited to a preferred wait time. 200msec
 	    is recommended but 100 might provide a faster and still reliable result.
             ```
@@ -210,25 +214,27 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 5.	Export (copy/paste) the calibration file to the project file CIVAinsCalibration.txt
 
 
-## 📖 How to Use for each flight plan
+## 📖 How to setup each flight plan
 
 > [!TIP]
 > See project file 'Videos\FlightPlanProcess.mkv' for an example of running steps 1-5
 
-1.  Run the run_civa.bat file from the project folder containing all the project files
+    MSFS doesn't need to be running for this setup.
+
+1.  Start a CMD window and run run_civa.bat file from the project folder containing all the project files
     including your version of CIVAinsCalibration.txt.
 
-2.  Select your exported MSFS .pln flight plan when prompted.
+2.  Select your MSFS .pln flight plan when prompted.
 
 3.  The script will generate a /legs folder containing the split flight plan parts.
 
-4.  Transfer to a saved macro per leg with activation hotkey:
+4.  Transfer to the saved macro template leg macro:
 
-    1.  Tab into Macro Commander and click on macro `Leg 1`. Delete any existing macro content.
+    1.  Tab to the CMD window and press `F9` to copy the first leg.
+    
+    2.  Tab into Macro Commander and click on macro `Leg 1`. Delete any existing macro content.
 
-	2.  Press `F9` to copy the first leg. 
-
-	3.  Paste into your Macro Commander editor window of the leg number macro. 
+	3.  Paste into your Macro Commander editor window for the selected leg. 
 	    Click on the leg macro list in the top window to transfer the contents and `Save`.
 
 	4.  Repeat for subsequent legs (a beep will confirm each successful copy).
@@ -237,23 +243,25 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 6.  Close Macro Commander and check it remains active in the windows toolbar 
     for triggering each leg during flight. 
+    
+## 📖 How to load each flight plan leg in MSFS
 
-7.  If you choose to load leg 1 from the EFB in the world map, the procedure during flight is:
+1.  If you choose to load leg 1 from the EFB in the world map, the procedure during flight is:
 
-	1.  Check the device for the last waypoint. This will be the destination.
+	1.  Check the CIVA device for the last waypoint. This will be the destination.
 
 	2.  When the last segment is active, switch to `Trk Hld` to allow INS editing.
 
 	3.  Set the CIVA view, ensure waypoint selector is 0, data selector is `WayPt`. 
-	    Hit the hotkey `Ctrl+Shift+2` and watch  the points load.
+	    Hit the hotkey `Ctrl + Shift + 2` and watch  the points load.
 	    As the points load a message box appears to show the first waypoint name.
 
 	4.  CLick `Wy Pt Chg` button and select 0 to 1. The From-To should change.
 
 	5.  Clear `Trk Hld` and hit `INS` on the AP panel.
 
-8.  If you are using CIVA manual load for all legs, 
-	follow 7.3 for the first leg with `Ctrl+Shift+1`
+2.  If you are using CIVA manual load for all legs, 
+	follow 1.3 for the first leg with `Ctrl + Shift + 1`
 	 
 	
 ## 📁 Project Structure
@@ -270,17 +278,20 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 6.  LICENSE.txt
 
-7.  EGLLKJFK_MFS_NoProc_18Apr26.pln: 
+7.  `tests\EGLLKJFK_MFS_NoProc_18Apr26.pln`: 
+
     A sample classic **Simbrief** flight plan used for testing.
     Modified as some original waypoints no longer exist. 
     This departure was used by Concorde as it allowed acceleration to supersonic flight phase over 
     the Bristol Channel. The CPT3F departure has been expanded in the "Selected Route" section 
     of the Simbrief edit page, although the VOR navigation departure is more interesting and typical. 
+
         ```
         EGLL D255G D259K WOD D100H CPT KENET UNZIB D149T BHD57 LESLU 
         5041N01500W 5050N02000W 5030N03000W 4916N04000W 4703N05000W 4610N05300W 4414N06000W 
         4246N06500W 4200N06700W 4044N06955W 4027N07230W CAMRN KJFK
         ```
+
     This should be placed in the flight plans Simbrief export folder.
 
 ## ⚖️ License
