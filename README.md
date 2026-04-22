@@ -12,7 +12,8 @@ was a part of normal operations.
 CIVA_flightplan.py parses standard `.pln` files, chunks them into up to 9 waypoint phases, and generates mouse-macro sequences for **Macro Commander**.
 
 There are 2 parts to this utility. The primary goal was to split a large flight plan into CIVA readable chunks,
-while preserving the structure of departure , arrival and intermediate waypoints required for EFB use.
+while preserving the structure of departure , arrival and intermediate waypoints required for EFB use. The second part
+was to load each set of waypoints to the CIVA device as the flight phase requires.
 
 The utility emulates a pilot, co-pilot 
 or flight engineer keying the required waypoints manually. Entry of a single waypoint is 17 keystrokes
@@ -102,7 +103,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 - **CIVA_flightplan.py** script running during flight plan setup only from a CMD window
 - **Fplans folder** where you normally direct generated flight plans from **Simbrief**, or similar.
                     A sub-folder, `\phases` will be created for the generated plans.
-- **Run as Administrator** The CMD window requires elevated execution to permit a global hotkey to be available
+- **Run as Administrator** The CMD window requires elevated execution to permit a global hotkey be available
   in other applications. F9 (or user keyed alternative) is used to copy the next phase prior to pasting into Macro Commander.
 - **MSFS** 
   The `Cockpit Interaction System` Flight Interface setting must be set to `Lock`. Single scroll on
@@ -266,7 +267,7 @@ EGLL D255G D259K WOD D100H CPT/F060 KENET UNZIB/F150 D149T/F280 BHD57 LESLU/F500
 - [ ] Test in FSS B727
 - [x] The required timing changes could be applied to the calibration file commands by the script.
 - [x] The raw calibration file could be parsed and updated automatically removing the 'Annotate' step
-- [ ] Add a popup message or a kneepad note or similar to name waypoints as the `from-to` selector progresses.
+- [x] Add a popup message or a kneepad note or similar to name waypoints as the `from-to` selector progresses.
       This may require an app such as Spad.Next monitor the next waypoint id.
 - [ ] Add a warning as the last waypoint becomes the active destination
 - [ ] The 9 waypoint entry has so far been very reliable in testing. A single waypoint entry option could be considered.
