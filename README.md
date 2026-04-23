@@ -121,7 +121,14 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 2. **Install Dependencies**:
    Open a CMD prompt in the folder and run:
-      py -m pip install -r requirements.txt
+   
+        `py -m pip install -r requirements.txt`
+        `py -m pip install -U pyinstaller`
+   It is recommended to create an exe using the installer
+   and modify the BAT files accordingly. This prevents inadvertent script file modification:
+   
+        `pyinstall civa_flightplan.py`
+        `pyinstall civa_calibrate.py`
 
 3. Start MSFS and Macro Commander as 'Administrator'
 
@@ -161,7 +168,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 ## 📖 How to setup each flight plan
 
 > [!TIP]
-> See project file 'Videos\FlightPlanProcess.mkv' for an example of running steps 1-5
+> See project file 'Videos\FlightPlanProcess.mkv' for an example of running steps 1-6
 
     MSFS doesn't need to be running for this setup.
 
@@ -248,6 +255,10 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 6.  LICENSE.txt
 
 7.  `Videos` folder for setup and use assistance.
+    1.  CalibrationStep.mkv
+    2.  FlightPlanProcess.mkv
+    3.  FlightPlanLoad.mkv
+    4.  CIVAInFlightUse.mkv
 
 8.  `tests\EGLLKJFK_MFS_NoProc_18Apr26.pln`: 
 

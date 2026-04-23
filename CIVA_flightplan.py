@@ -67,7 +67,7 @@ def get_global_icao(container, tag_name):
 # WPtablehdr = 
 def getMsgHeader ():
   return (' <msg>(100,100, \"<html>\n'
-              '<table style=%_vQuoteChar%width: 100%; max-width: 300px; font-family: Verdana, sans-serif;  \n'
+              '<table style=%_vQuoteChar%width: 100%; max-width: 350px; font-family: Verdana, sans-serif;  \n'
               'border-collapse: collapse; border: 1px solid #ccc; border-radius: 8px; \n'
               'table-layout: fixed; overflow: hidden; display: table;%_vQuoteChar%> \n'
               '<thead>\n'
@@ -93,7 +93,7 @@ def getMsgRow(ID, Name, Elev_ft):
 # WPtableFooter = 
 def getMsgFooter ():
   return ('</tbody>\n'
-          '</table>\",\"CIVA Waypoints\",1,0,0,0, 25%,40%)\n')
+          '</table>\",\"CIVA Waypoints\",1,0,0,1, 25%,45%)\n')
 
 
 def process_flight_plan():
@@ -435,14 +435,13 @@ def start_clipboard_cycler(phase_files, WPmsg_files, chosen_key):
                 print(f"Error: {e}")
         else:
             # change color on CMD window:
-            if stateMsg["index"] = 0:
+            if stateMsg["index"] == 0:
                 os.system('color 0A')
                 print("\n" + "="*50)            
                 print(" Starting waypoint details Message set (ESC to exit)")
-                print(f" Tab to Macro Commander macro edit window for 'Waypoints 1' \n and hit F9 to copy first file")             
+                print(" Tab to Macro Commander macro edit window for 'Waypoints 1' \n and hit F9 to copy first file")             
                 print("\n" + "="*50)          
 
-            print("\n" + "="*50)
             if stateMsg["index"] < total:
                 try:
                     file_path = WPmsg_files[stateMsg["index"]]
@@ -468,9 +467,9 @@ def start_clipboard_cycler(phase_files, WPmsg_files, chosen_key):
     print("      CIVA CLIPBOARD CYCLER ACTIVE")
     print(f" Hotkey: [ {chosen_key.upper()} ]") # Shows the user their choice
     print(f" Set1: {total} WP files; Set2: {total} message files")
-    print(f" 1. Tab to Macro Commander macro edit window for 'phase 1' \n and hit F9 to copy first file")    
-    print(f" 2. Ctrl-v to paste first file and click on top macro list window to transfer edit.")             
-    print(f" 3. Click on 'phase 2' file in macro list window and repeat...")   
+    print(" 1. Tab to Macro Commander macro edit window for 'phase 1' \n and hit F9 to copy first file")    
+    print(" 2. Ctrl-v to paste first file and click on top macro list window to transfer edit.")             
+    print(" 3. Click on 'phase 2' file in macro list window and repeat...")   
     print(" [ ESC ] - Exit at any time")
     print("="*50)
 
