@@ -111,7 +111,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
   
 >   [!NOTE]
 >  If the `FMC` display is visible next to the pilot INS, 
->  the `Auto-Man` switch must be set to `Man` to operate under `INS`. This should becomes   
+>  the `Auto-Man` switch must be set to `Man` to operate under `INS`. This should be   
 >  done every flight as the default is auto. On the `INS` unit, the `Auto-Man` switch should 
 >  be set to `Auto` to automatically transition to the next waypoint.
 
@@ -128,16 +128,15 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 	1.  Open the `CIVAkeypush.macros` macro group file and note the individual macros named
 		`phase 1` to 7 (to load the INS) and `waypoints 1` to 7 (to display a waypoint details message). 
         The assigned activation hotkeys are `ctrl + shift + 1` through 7 and
-        `ctrl + shift + F1` through 7 respectively. Change to your preferred
+        `ctrl + shift + F1` through 7 respectively. Change your preferred
         hotkeys as needed. The hotkey for each phase should be a compound key combination
         dissimilar to other shortcut keys to avoid inadvertent use.
 
     2.  In MSFS, zoom to the CIVA unit with your saved view. 
-        
-4. Calibrate: 
 
-> [!TIP]
->       See the project: Videos\CalibrationStep.mkv video.
+> [!TIP] See the project: Videos\CalibrationStep.mkv video as a guide. 
+       
+4. Calibrate: 
 
 	1. Note that `CIVAinsCalibration.txt` is a saved copy of the `Calibration` button locations
 		to be read by `CIVA_flightplan.py` . 
@@ -166,12 +165,11 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
     MSFS doesn't need to be running for this setup.
 
-1.  Start a CMD window and run run_civa.bat file from the project folder containing all the project files
-    including your version of CIVAinsCalibration.txt.
+1.  Start a CMD window and run run_civa.bat file from the project folder containing all the project files including your version of CIVAinsCalibration.txt.
 
 2.  Select your MSFS .pln flight plan when prompted.
 
-3.  The script will generate a /phases folder containing the split flight plan parts.
+3.  The script will generate a `/phases` folder containing the split flight plan parts.
 
 4.  Transfer to the saved macro template phase macro:
 
@@ -195,6 +193,12 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
     
 ## 📖 How to load each flight plan phase in MSFS
 
+> [!TIP]
+>       A useful upgrade
+>       to the INS unit including the Alert light and other significant improvements 
+>       to the aircraft can be found in the addon:
+>   "https://flightsim.to/addon/94824/dc-designs-concorde-systems-enhancement"
+
 1.  Prerequisites for manual waypoint entry are:
 
 	  1. Cold and dark checklist including Mode Selector Unit (MSU) to NAV or start with aircraft running.
@@ -206,20 +210,14 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
       4. `Waypoint/DME` selector set to zero. **This must be set manually.**
 
 2.  If you choose to load phase 1 from the EFB in the world map, and use the CIVA `Remote` 
-    flight plan load step, the procedure during flight is:
+    flight plan load step, the procedure during flight from phase 2 is:
 
 	1.  Check the CIVA device for the last waypoint.
 
-	2.  When the last segment is active, switch to `Trk Hld` 
-        (and `Radio Navigation Selector`) to allow INS editing.
+	2.  When the last leg is active, switch to `Trk Hld` 
+        (and `Radio Navigation Selector`) to hold course and allow INS editing.
         Note the `Alert` button should light as the waypoint is approaching. 
         
-> [!TIP]
->       A useful upgrade
->       to the INS unit including the Alert light and other significant improvements 
->       to the aircraft can be found in the addon:
->       "https://flightsim.to/addon/94824/dc-designs-concorde-systems-enhancement"
-
 	3.  Set the CIVA view, ensure waypoint selector is 0, data selector is `WayPt`. 
 	    Hit the hotkey `Ctrl + Shift + 2` and watch  the points load for the 2nd phase.
 	    Use `Ctrl + Shift + F2` to display a message box with each waypoint number, name and elevation.
