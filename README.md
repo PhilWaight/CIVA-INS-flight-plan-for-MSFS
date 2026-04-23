@@ -11,16 +11,18 @@ was a part of normal operations.
  
 CIVA_flightplan.py parses standard `.pln` files, chunks them into up to 9 waypoint phases, and generates mouse-macro sequences for **Macro Commander**.
 
-There are 2 parts to this utility. The primary goal was to split a large flight plan into CIVA readable chunks,
+There are 2 parts to this utility. The primary goal splits a large flight plan into CIVA readable chunks,
 while preserving the structure of departure , arrival and intermediate waypoints required for EFB use. The second part
-was to load each set of waypoints to the CIVA device as the flight phase requires.
+exports each set of waypoints for the CIVA device for hotkey load in the cockpit.
 
 The utility emulates a pilot, co-pilot 
 or flight engineer keying the required waypoints manually. Entry of a single waypoint is 17 keystrokes
 on the CIVA unit, thus requiring the use of automation, but through the standard INS interface. 
 
-A calibration script CIVA_calibrate.py allows the button positions to be recorded once for your preferred view and monitor 
+The calibration script CIVA_calibrate.py (run_calibrate.bat) allows the button positions to be recorded once for your preferred view and monitor 
 and saved for use with each new flight plan.
+
+The flight plan load script, CIVA_flightplan.py (run_civa.bat) splits the flight plan to a phases folder and outputs a macro for each phase. You save the macros using the Macro Commander UI.
 
 Use of the free tool **Macro Commander**: This is a windows tool which I have used reliably in **MSFS**
 for improving the user experience in the MSFS UI. As an example, importing a flight plan from a disk file,
@@ -82,13 +84,12 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 ## ✈️ Features
 
-- **Smart Parsing**: Extracts Waypoint name, Latitude, Longitude, and Elevation from MSFS XML flight plans.
+- **Parsing**: Extracts Waypoint name, Latitude, Longitude, and Elevation from MSFS XML flight plans.
 - **CIVA Logic**: Coordinate formatting (CDDMMS / CDDDMMS) and rounds seconds to the INS-required single digit.
-- **Clipboard Cycler**: Uses a global hotkey (`F9`) to feed macro phases into the clipboard 
+- **Clipboard Cycler**: Uses a global hotkey to feed macro phases into the clipboard 
 					during flight setup. Paste into the phase templates and save for in-flight use.							
-- **On-Screen Feedback**: Includes audio beeps and console counters to track your progress while tabbed into the sim.
-- **Custom Calibration**: Uses an external `.txt` file in macro format for mouse coordinates, 
-					allowing rerecording to match screen resolution and saved cockpit view.
+- **On-Screen Feedback**: Includes audio beeps and console counters to track your progress while saving the plan macros.
+- **Custom Calibration**: Uses an external `.txt` file in macro format for mouse coordinates, allowing rerecording to match screen resolution and saved cockpit view.
 - ** Portability **: This utility could be used in other MSFS aircraft and possibly in other simulators.
 
 ## 🛠️ Requirements
@@ -96,20 +97,23 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 - **Python 3.10+**
 - **Macro Commander** (Basic-free or Pro current version 2.8.5) running during flight to 
    action each CIVA load. Suggest use of the download option from the web site and install, rather than
-   the Microsoft Store version, as the Store version  hasnt been tested.
+   the Microsoft Store version, as the Store version hasn't been tested.
    [Download Macro Commander Basic 2.8.5 from Website](https://www.macro-commander.com/download)
 - **External Libraries**: `pyperclip`, `pynput`, `keyboard`
 - **CIVA_calibrate.py** script running from a CMD window during CIVA button identification in MSFS.
 - **CIVA_flightplan.py** script running during flight plan setup only from a CMD window
-- **Fplans folder** where you normally direct generated flight plans from **Simbrief**, or similar.
-                    A sub-folder, `\phases` will be created for the generated plans.
-- **Run as Administrator** The CMD window requires elevated execution to permit a global hotkey availability
+- **Fplans folder** where you normally direct generated flight plans from **Simbrief**, or similar. A sub-folder, `\phases` will be created for the generated plans.
+- **Run as Administrator** The CMD window requires elevated execution to permit a  global hotkey availability
   in other applications. F9 (or user keyed alternative) is used to copy the next phase prior to pasting into Macro Commander. Macro Commander may also need Administrator.
 - **MSFS** 
   The `Cockpit Interaction System` Flight Interface setting must be set to `Lock`. Single scroll on
   the waypoint selector fails if `Legacy` is used.
-  If the `FMC` display is visible next to the INS, 
-  the `Auto-Man` switch must be set to `Man` to operate under `INS`. This should be done every flight.
+  
+>   [!NOTE]
+>  If the `FMC` display is visible next to the pilot INS, 
+>  the `Auto-Man` switch must be set to `Man` to operate under `INS`. This should becomes   
+>  done every flight as the default is auto. On the `INS` unit, the `Auto-Man` switch should 
+>  be set to `Auto` to automatically transition to the next waypoint.
 
 ## 🚀 Installation & Setup
 
@@ -119,20 +123,21 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
    Open a CMD prompt in the folder and run:
       py -m pip install -r requirements.txt
 
-3. Start MSFS and Macro Commander
+3. Start MSFS and Macro Commander as 'Administrator'
 
 	1.  Open the `CIVAkeypush.macros` macro group file and note the individual macros named
-		`phase 1` to 7. [A `calibration` macro was used in an early dev version to record button locations].
-        The assigned activation hotkeys are `ctrl + shift + 1` through 9. Change to your preferred
+		`phase 1` to 7 (to load the INS) and `waypoints 1` to 7 (to display a waypoint details message). 
+        The assigned activation hotkeys are `ctrl + shift + 1` through 7 and
+        `ctrl + shift + F1` through 7 respectively. Change to your preferred
         hotkeys as needed. The hotkey for each phase should be a compound key combination
         dissimilar to other shortcut keys to avoid inadvertent use.
 
     2.  In MSFS, zoom to the CIVA unit with your saved view. 
         
-> [!TIP]
->       See the project: Videos\CalibrationTest.mkv video.
-
 4. Calibrate: 
+
+> [!TIP]
+>       See the project: Videos\CalibrationStep.mkv video.
 
 	1. Note that `CIVAinsCalibration.txt` is a saved copy of the `Calibration` button locations
 		to be read by `CIVA_flightplan.py` . 
@@ -170,21 +175,22 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 4.  Transfer to the saved macro template phase macro:
 
-    1.  Tab to the CMD window and press `F9` to copy the first phase to the clipboard.
-    
-    2.  Tab into Macro Commander and click on macro `Phase 1` in the top macro list window. 
+    1.  Tab into Macro Commander window and click on macro `Phase 1` in the top macro list window
+        
+    2.  Press `F9` to copy the first phase to the clipboard.
         Delete any existing macro content from the editor window.
 
 	3.  Paste into your Macro Commander editor window for the selected phase.
         [The following step is a less intuitive requirement of Macro Commander:]
-	    **Click on the phase macro list in the top window to transfer the contents of the macro body** 
-        and `Save`.
+	    **Click on the phase macro list in the top window to transfer the contents of the macro body** .
+        
+    4.  After each phase macro is copied, the script proceeds to the waypoints set.
 
-	4.  Repeat from step i. for subsequent phases (a beep will confirm each successful copy).
+	5.  Repeat from step i. for subsequent phases and waypoints (a beep will confirm each successful copy).
 
 5.  Press ESC in the command window to finish and close the CMD window. 
 
-6.  Close Macro Commander and check it remains active in the windows toolbar 
+6.  Click on `File > Save` in Macro Commander exit the app and check it remains active in the windows toolbar 
     for triggering each phase during flight. 
     
 ## 📖 How to load each flight plan phase in MSFS
@@ -204,19 +210,25 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 	1.  Check the CIVA device for the last waypoint.
 
-	2.  When the last segment is active, switch to `Trk Hld` to allow INS editing.
-        Note the `Alert` button should light as the waypoint is approaching. The
-        correct function of the INS unit including the Alert light and other significant improvements 
-        can be found in the addon:
-        "https://flightsim.to/addon/94824/dc-designs-concorde-systems-enhancement"
+	2.  When the last segment is active, switch to `Trk Hld` 
+        (and `Radio Navigation Selector`) to allow INS editing.
+        Note the `Alert` button should light as the waypoint is approaching. 
+        
+> [!TIP]
+>       A useful upgrade
+>       to the INS unit including the Alert light and other significant improvements 
+>       to the aircraft can be found in the addon:
+>       "https://flightsim.to/addon/94824/dc-designs-concorde-systems-enhancement"
 
 	3.  Set the CIVA view, ensure waypoint selector is 0, data selector is `WayPt`. 
-	    Hit the hotkey `Ctrl + Shift + 2` and watch  the points load.
-	    A message box appears to show each waypoint name, position and elevation.
+	    Hit the hotkey `Ctrl + Shift + 2` and watch  the points load for the 2nd phase.
+	    Use `Ctrl + Shift + F2` to display a message box with each waypoint number, name and elevation.
 
-	4.  Click `Wy Pt Chg` button and select 0 to 1. The From-To should change.
+	4.  Click `Wy Pt Chg` button and select 0 to 1 and `Insert`. The From-To should change. The CIVA
+        convention {current location:0} to {waypoint number} should be used to initiate the device
+        for this phase from a particular waypoint.
 
-	5.  Clear `Trk Hld` and hit `INS` on the AP panel.
+	5.  Clear `Trk Hld`, select `INS Navigation` and hit `INS` on the AP panel.
 
 2.  If you are using CIVA manual load for all phases, 
 	follow from step 2.iii for the first phase with `Ctrl + Shift + 1` and from step 2.ii for subsequent phases.
@@ -268,13 +280,10 @@ EGLL D255G D259K WOD D100H CPT/F060 KENET UNZIB/F150 D149T/F280 BHD57 LESLU/F500
 - [x] The required timing changes could be applied to the calibration file commands by the script.
 - [x] The raw calibration file could be parsed and updated automatically removing the 'Annotate' step
 - [x] Add a popup message or a kneepad note or similar to name waypoints as the `from-to` selector progresses.
-      This may require an app such as Spad.Next monitor the next waypoint id.
-- [ ] Add a warning as the last waypoint becomes the active destination
+- [ ] Add an audible warning as the last waypoint becomes the active destination
 - [ ] The 9 waypoint entry has so far been very reliable in testing. A single waypoint entry option could be considered.
-- [ ] An option to push a set of named waypoints on the fly for a diversion would be appealing, with a lookup to find the 
-      coordinates. This could involve some interaction with the EFB.
-- [ ] The Macro Commander Pro version has an `<Include>` text file option which would simplify the setup of each flight plan
-      considerably. Include replaces the macro content with the file commands and runs them.
+- [ ] An option to push a set of named waypoints on the fly for a diversion would be appealing, with a lookup to find the coordinates. This could involve some interaction with the EFB.
+- [ ] The Macro Commander Pro version has an `<Include>` text file option which would simplify the setup of each flight plan. Include replaces the macro content with the file commands and runs them.
 
 
 ## ⚖️ License
