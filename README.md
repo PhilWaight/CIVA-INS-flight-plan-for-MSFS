@@ -56,7 +56,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
     2. ensures it is not so fast as to fail with inherent responsiveness in the UI to contend with. 
     
     Also there is some satisfaction in watching the key inputs, so this is definitely a user choice. 
-    100ms is recommended and 50ms works in testing.
+    200ms is recommended and 100ms works in testing.
     
 5.  It is understood that during the CIVA load, no mouse or keyboard activity is possible. This process
     only takes a minute.
@@ -75,8 +75,8 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
     INS     - Inertial Navigation System
     Flight plan
     Waypoint
-    NoProc  - an export form from **Simbrief** omitting SID and STAR details.
-			  Noproc version is preferred for CIVA_flightplan as all
+    NoProc  - an export form from **Simbrief Downloader** omitting SID and STAR details. (`FS2020 No SID/STAR`)
+			  Noproc version is required for CIVA_flightplan as all
               waypoints have a <WorldPosition> tag
     Phase - Each set of up to 9 waypoints for input to the CIVA unit
     Leg   - The path between consecutive waypoints.
@@ -99,7 +99,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
    action each CIVA load. Suggest use of the download option from the web site and install, rather than
    the Microsoft Store version, as the Store version hasn't been tested.
    [Download Macro Commander Basic 2.8.5 from Website](https://www.macro-commander.com/download)
-- **External Libraries**: `pyperclip`, `pynput`, `keyboard`
+- **External Libraries**: `pyperclip`, `pynput`, `keyboard`, `pypdf`
 - **CIVA_calibrate.py** script running from a CMD window during CIVA button identification in MSFS.
 - **CIVA_flightplan.py** script running during flight plan setup only from a CMD window
 - **Fplans folder** where you normally direct generated flight plans from **Simbrief**, or similar. A sub-folder, `\phases` will be created for the generated plans.
@@ -108,6 +108,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 - **MSFS** 
   The `Cockpit Interaction System` Flight Interface setting must be set to `Lock`. Single scroll on
   the waypoint selector fails if `Legacy` is used.
+- **Simbrief Downloader**: Ensure the MSFS 2020 versions are selected for output as these include the `<WorldPosition>` tag.
   
 >   [!NOTE]
 >  If the `FMC` display is visible next to the pilot INS, 
@@ -122,8 +123,9 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 2. **Install Dependencies**:
    Open a CMD prompt in the folder and run:
    
-        `py -m pip install -r requirements.txt`
-        `py -m pip install -U pyinstaller`
+        py -m pip install -r requirements.txt
+        py -m pip install -U pyinstaller
+        
    It is recommended to create an exe using the installer
    and modify the BAT files accordingly. This prevents inadvertent script file modification:
    
@@ -174,7 +176,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 1.  Start a CMD window and run run_civa.bat file from the project folder containing all the project files including your version of CIVAinsCalibration.txt.
 
-2.  Select your MSFS .pln flight plan when prompted.
+2.  Select your MSFS .pln flight plan when prompted. (eg EGLLKJFK_MFS_25Apr26.pln or EGLLKJFK_MFS_NoProc_25Apr26.pln)
 
 3.  The script will generate a `/phases` folder containing the split flight plan parts.
 
@@ -201,14 +203,14 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 ## 📖 How to load each flight plan phase in MSFS
 
 > [!TIP]
->       A useful upgrade
->       to the INS unit including the Alert light and other significant improvements 
+>       A useful upgrade to the 
+>       INS unit including the Alert light and other significant improvements 
 >       to the aircraft can be found in the addon:
 >   "https://flightsim.to/addon/94824/dc-designs-concorde-systems-enhancement"
 
 1.  Prerequisites for manual waypoint entry are:
 
-	  1. Cold and dark checklist including Mode Selector Unit (MSU) to NAV or start with aircraft running.
+	  1. Cold and dark checklist including Engineers Panel, Mode Selector Unit (MSU) to NAV or start with aircraft running.
 
       2. The CIVA INS (C/DU) on .
 
@@ -221,7 +223,7 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
 
 	1.  Check the CIVA device for the last waypoint.
 
-	2.  When the last leg is active, switch to `Trk Hld` 
+	2.  When the last leg is active, switch to `Hdg Hld` 
         (and `Radio Navigation Selector`) to hold course and allow INS editing.
         Note the `Alert` button should light as the waypoint is approaching. 
         
@@ -233,11 +235,34 @@ Please read the "Notes and Warnings" and be prepared to familiarise yourself wit
         convention {current location:0} to {waypoint number} should be used to initiate the device
         for this phase from a particular waypoint.
 
-	5.  Clear `Trk Hld`, select `INS Navigation` and hit `INS` on the AP panel.
+	5.  Clear `Hdg Hld`, select `INS Navigation` and hit `INS` on the AP panel.
 
 2.  If you are using CIVA manual load for all phases, 
 	follow from step 2.iii for the first phase with `Ctrl + Shift + 1` and from step 2.ii for subsequent phases.
-	 
+
+## 📁 Using Radio Navigation In Conjunction with INS
+
+    The switch between radio nav and INS with an INS flight plan loaded should require:
+    
+    To VOR NAV
+    
+    1.  Set AFCS panel `HDG HLD` to maintain current heading.
+    2.  Switch `Radio/INS` nav selector to `Rad`.
+    3.  Switch `Nav1/Stand-by` selector to the VOR frequency of the beacon.
+    4.  Set AFCS panel, `INS` off, `TRK HDG` to desired mode.
+    5.  Use AFCS, `course` knob to addjust required radial.
+    5.  If multiple VORs to be tuned, use the co-pilot nav selector and the pilot's Nav 1/2 switch.
+    
+    There seem to be some issues in VOR beacon frequency setup in current version 1.1.2 of Concorde.
+    The DME1 indicator appears to be connected to the stand-by frequency.
+    The VOR/DME distance display is the best indicator as to correct tuning.
+    
+    To INS
+    
+    1.  Switch `Radio/INS` nav selector to `INS`.
+    2.  Set AFCS panel, `INS` on.
+    3.  Select the `From-To` selector on the INS to `0-required waypoint` using the method in 2.iv above.
+    
 	
 ## 📁 Project Structure
 
@@ -278,7 +303,7 @@ EGLL D255G D259K WOD D100H CPT/F060 KENET UNZIB/F150 D149T/F280 BHD57 LESLU/F500
 > [!NOTE] 
 >   Simbrief does not recognise Concorde performance data and produces erroneous altitude predictions.
 >   A workaround is to use the wypt/Fnnn syntax to advise departure restriction, supersonic acceleration points
->   and expected cruise altitude waypoint altitudes. It seems to calculate a TOD with these minimal inputs.
+>   and expected cruise altitude waypoint altitudes. It seems to calculate a TOD with these minimal inputs. Simbrief will not accept flight level constraints on descent.
 >   To assist vertical profile planning, these altitudes will be displayed alongside the waypoint name
 >   in the onscreen message attached to each phase.
     
@@ -286,9 +311,11 @@ EGLL D255G D259K WOD D100H CPT/F060 KENET UNZIB/F150 D149T/F280 BHD57 LESLU/F500
 - [x] Add usage videos
 - [x] Replace manual calibration record step with script prompted button capture
 - [ ] Test in FSS B727
+- [x] Parse flightplan.PDF OFP file to extract Dispatcher Remarks containing accel and decel waypoints for highlighting on waypoint message list.
 - [x] The required timing changes could be applied to the calibration file commands by the script.
 - [x] The raw calibration file could be parsed and updated automatically removing the 'Annotate' step
 - [x] Add a popup message or a kneepad note or similar to name waypoints as the `from-to` selector progresses.
+- [ ] Port to MSFS 2024 toolbar and streamline usage. Remove Macro Commander by performing the mouse activity and timing using python imports. Add a phase selector and use Simconnect wrapper to monitor INS progress. Replace macro message box with waypoint id, name with a native message function.
 - [ ] Add an audible warning as the last waypoint becomes the active destination
 - [ ] The 9 waypoint entry has so far been very reliable in testing. A single waypoint entry option could be considered.
 - [ ] An option to push a set of named waypoints on the fly for a diversion would be appealing, with a lookup to find the coordinates. This could involve some interaction with the EFB.
